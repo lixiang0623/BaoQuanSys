@@ -1,0 +1,89 @@
+* {
+  // @extend .noselect;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  min-height: 100%;
+  background-color: #ffffff;
+}
+
+
+.button {
+  width: 280px;
+  height: 44px;
+  background-color: rgba(216, 216, 216, 1);
+  border-radius: 22px;
+  border: none;
+  font-size: 18px;
+  display: block;
+  color: #ffffff;
+  font-family: PingFangSC-Medium;
+}
+
+.date-button {
+  display: flex;
+  align-items: center;
+  font-family: PingFangSC-Regular;
+  font-size: 13px;
+  color: #757575;
+  border: 1px solid #979797;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 5px 14px;
+
+  &:after {
+    content: " ";
+    margin-left: 15px;
+    border-left: 1px solid #b2b2b2;
+    border-bottom: 1px solid #b2b2b2;
+    height: 5px;
+    width: 5px;
+    transform: translate(1px, -1px) rotate(-45deg);
+    border-right: 1px solid transparent;
+    border-top: 1px solid transparent;
+  }
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently not supported by any browser */
+}
+
+
+.ready-button {
+  background: #E23E00;
+}
+
+
+.checkbox-component-with-img-cover() {
+  .checkbox-component {
+    input {
+      &:checked + label > .input-box > .input-box-tick > path {
+        opacity: 0;
+      }
+
+      &:focus + label > .input-box {
+        box-shadow: none;
+      }
+    }
+
+    input + label > .input-box {
+      border-color: #C0C0C0;
+      border-radius: 50%;
+    }
+
+    input:checked + label > .input-box {
+      background: url("~common/img/checkbox-selected.png") no-repeat center center;
+      background-size: 100% 100%;
+      border-color: white;
+    }
+  }
+}
