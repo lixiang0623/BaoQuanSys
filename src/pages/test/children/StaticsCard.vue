@@ -25,7 +25,7 @@
       },
       sum: {
         type: String,
-        default: "999"
+        default: ""
       }
     },
   };
