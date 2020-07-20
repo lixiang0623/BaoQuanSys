@@ -35,7 +35,7 @@ export function getHeadImg() {
 	return new Promise((resolve, reject) => {
 
 		AlipayJSBridge.call('choosePhotos', {
-			maxCnt: 3
+			maxCnt: 1
 		}, function(result) {
 
 			resolve(result)
@@ -67,16 +67,9 @@ export function hideNaviBar(urlhtml) {
 
 		})
 }
-export function ShouNav(urlhtml) {
+export function ShouNav() {
 
-	AlipayJSBridge.call('hideNaviBar', {
-			type: '0',
-		},
-		() => {
-
-			
-
-		})
+AlipayJSBridge.call('popWindow');
 }
 
 //			

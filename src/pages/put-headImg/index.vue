@@ -85,17 +85,16 @@ text-align: center;">{{staffTypeOne}}</div>
 				getHeadImg().then(resultimg => {
 
 					if(resultimg != '') {
-						this.imageData = 'data:image/png;base64,' + resultimg;
+						this.imageData = 'data:image/png;base64,' + resultimg[0];
 
-						this.imageURL = resultimg;
+						this.imageURL = resultimg[0];
 						
+						
+						console.log("第三方水电费水电费水电费+", resultimg)
 
 						this.putimagebtn();
 					}
-					
-					
-					
-
+	
 				});
 
 			},

@@ -61,6 +61,10 @@
 
 			<div v-show="IsMonth">
 				<div style="width: 94%;background: white;margin-left: 3%;border-top-left-radius: 5px;border-top-right-radius: 5px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;flex-direction: column;margin-bottom: 10px;margin-top: 30px;">
+					<div>
+						
+						<span style="font-size:18px ;margin-left: 5%;color: #4B5F6C;">当月业绩状况</span>
+					</div>
 					<div class="Echarts">
 						<div id="main" style="width:100%;height:400px;"></div>
 					</div>
@@ -92,9 +96,15 @@ box-shadow: 0 2px 10px 0 rgba(186,199,223,0.41);width: 40%;margin-left:10%;borde
 			
 			<div v-show="!IsMonth">
 				<div style="width: 94%; background: white;margin-left: 3%;border-top-left-radius: 5px;border-top-right-radius: 5px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;flex-direction: column;margin-bottom: 10px;margin-top: 30px;">
-					<div class="Echarts">
-						<div id="mainFour" style="width:380px;height:400px;margin-left: 10px;"></div>
+					
+						<div>
+						
+						<span style="font-size:18px ;margin-left: 5%;color: #4B5F6C;">当年业绩状况</span>
 					</div>
+					<div class="Echarts">
+						<div id="mainFour" style="width:100%;height:400px;margin-left: 10px;"></div>
+					</div>
+					
 
 					<div>
 						<span style="font-size:18px ;margin-left: 5%;color: #4B5F6C;">当年业绩进度</span>
@@ -180,9 +190,9 @@ box-shadow: 0 2px 10px 0 rgba(186,199,223,0.41);width: 40%;margin-left:5%;border
 				title2: "当日PAD\n面签件数",
 
 				option: {
-					title: {
-						text: '当月业绩状况'
-					},
+//					title: {
+//						text: '当月业绩状况'
+//					},
 					tooltip: {},
 					axisTick: {
 						show: false
@@ -234,9 +244,9 @@ box-shadow: 0 2px 10px 0 rgba(186,199,223,0.41);width: 40%;margin-left:5%;border
 				},
 
 				optionYear: {
-					title: {
-						text: '当年业绩状况'
-					},
+//					title: {
+//						text: '当年业绩状况'
+//					},
 					tooltip: {},
 
 					xAxis: {
@@ -320,8 +330,9 @@ box-shadow: 0 2px 10px 0 rgba(186,199,223,0.41);width: 40%;margin-left:5%;border
 
 				this.userid = userId;
 				this.getNum();
-				this.getMonth();
-				this.getYear();
+				this.checkBtnMonth()
+//				this.getMonth();
+				
 			});
 
 		},
@@ -345,12 +356,14 @@ box-shadow: 0 2px 10px 0 rgba(186,199,223,0.41);width: 40%;margin-left:5%;border
 
 				this.IsMonth = true;
 
+				this.getMonth();
 				console.log("对方是否" + this.IsMonth);
 
 			},
 			checkBtnYear() {
 
 				this.IsMonth = false;
+				this.getYear();
 				console.log("对方是否22222" + this.IsMonth);
 
 			},
@@ -376,11 +389,7 @@ box-shadow: 0 2px 10px 0 rgba(186,199,223,0.41);width: 40%;margin-left:5%;border
 			},
 			toApplicationDetail() {
 
-				//				AlipayJSBridge.call('pushWindow', {
-				//					url: 'apply-detail.html', // 要打开页面的 URL
-				//					// 打开页面的配置参数
-				//			   
-				//				});
+				
 
 				window.location.href = "apply-detail.html"
 			},
@@ -414,6 +423,8 @@ box-shadow: 0 2px 10px 0 rgba(186,199,223,0.41);width: 40%;margin-left:5%;border
 
 				}
 			},
+			
+			
 
 			//当月业绩
 			async getMonth() {
@@ -431,6 +442,7 @@ box-shadow: 0 2px 10px 0 rgba(186,199,223,0.41);width: 40%;margin-left:5%;border
 					} = await MonthyejiCheck({
 						userid: this.userid,
 					});
+					if(resultCode=="00"){
 
 					console.log("当月+" + resultCode + "当月+" + appTotalM)
 
@@ -459,6 +471,13 @@ box-shadow: 0 2px 10px 0 rgba(186,199,223,0.41);width: 40%;margin-left:5%;border
 
 					this.optionThree.series.data = arrTwo;
 					myChartTwo.setOption(this.optionThree);
+					}
+					else if(resultCode=="01")
+					{
+						this.$toast('未查询到当月业绩数据');
+						
+						
+					}
 				} catch(error) {
 
 				}
@@ -481,6 +500,7 @@ box-shadow: 0 2px 10px 0 rgba(186,199,223,0.41);width: 40%;margin-left:5%;border
 					} = await YearyejiCheck({
 						userid: this.userid,
 					});
+					if(resultCode=="00"){
 					var arr = [];
 
 					arr.push(appTotalY, newY, moveTotalY, faceTotalY, prefaceY, faceMoveY)
@@ -514,6 +534,11 @@ box-shadow: 0 2px 10px 0 rgba(186,199,223,0.41);width: 40%;margin-left:5%;border
 					//年动户完成率	
 					this.optionThree.series.data = arrThree;
 					myChartThree.setOption(this.optionThree);
+					}
+					else if(resultCode=="01")
+					{
+						this.$toast('未查询到当年业绩数据');
+					}
 
 				} catch(error) {
 

@@ -109,17 +109,24 @@ export function quanxian(params) {
 export function putHeadImg(params) {
 	
 	
-	var str=params.imageBase64.result.replace(/(\r\n)|(\n)|(\r)/g,'')
+	//var str=params.imageBase64
+	
 	
     const requestData = {
         _requestBody: {
             userid: params.userid,
-            imageBase64:str
+            imageBase64:params.imageBase64
 
         }
+        
+        
+        
     }
     
-    console.log("对方水电111费水电费"+JSON.stringify(requestData))
+    
+    
+  //  console.log("对方水电111费水电费",requestData)
+
 
    //console.log("对方水电费水电费"+params.imageBase64)
    

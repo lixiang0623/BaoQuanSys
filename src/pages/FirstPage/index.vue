@@ -3,9 +3,9 @@
 
 					<div style="height: 50px;width: 100%;background: #4895FA;flex-direction: row;display: flex">
 			
-		<!--	<div class="rt_pos" @click="onClickLeft"></div>-->
+			<div class="rt_pos" @click="onClickLeft"></div>
 
-			<div style="text-align: center;font-size: 14px;color: white;display: flex;width: 20%;margin-left: 45%;margin-top: 10px;">酷卡营销</div>
+			<div style="text-align: center;font-size: 14px;color: white;display: flex;width: 20%;margin-left: 30%;margin-top: 10px;">酷卡营销</div>
 
 		</div>
 
@@ -54,7 +54,8 @@
 	import {
 
 		getUserId,
-		ShouNav
+		ShouNav,
+		hideNaviBar
 
 	} from "service/nativeUtils";
 	export default {
@@ -70,7 +71,7 @@
 
 		created() {
 
-			ShouNav();
+			hideNaviBar();
 			getUserId().then(userId => {
 
 				this.userid = userId;
@@ -98,6 +99,7 @@
 			
 						onClickLeft() {
 
+ShouNav();
 				//window.location.href = "index.html"
 
 			},
