@@ -31,7 +31,7 @@ export async function sendRequest({
 			requestData: [requestData],
 		}, function(response) {
 
-			console.log('返回数值' + JSON.stringify(response))
+//			console.log('返回数值' + JSON.stringify(response))
 
 			AlipayJSBridge.call('hideLoading');
 			resolve(response)

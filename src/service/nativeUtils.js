@@ -37,6 +37,9 @@ export function getHeadImg() {
 		AlipayJSBridge.call('choosePhotos', {
 			maxCnt: 1
 		}, function(result) {
+			
+			
+			console.log("啊都是大所+",result);
 
 			resolve(result)
 

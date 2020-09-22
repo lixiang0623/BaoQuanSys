@@ -1,38 +1,91 @@
 <template>
 	<div class="firstPage">
 
-					<div style="height: 50px;width: 100%;background: #4895FA;flex-direction: row;display: flex">
-			
-			<div class="rt_pos" @click="onClickLeft"></div>
+		<div style="height: 50px;width: 100%;background: white;flex-direction: row;display: flex">
 
-			<div style="text-align: center;font-size: 14px;color: white;display: flex;width: 20%;margin-left: 30%;margin-top: 10px;">酷卡营销</div>
+			<img style="width: 14px;height: 18px;margin-left: 18px;margin-top: 18px;" @click="onClickLeft" src="~common/img/arrow.png" />
+
+			<div style="text-align: center;font-size: 14px;color: black;display: flex;justify-content: center;width: 100%;align-items: center;">上海银行资产保全系统</div>
 
 		</div>
 
 		<div v-if="isFlag">
-			<div>
-
-				<img style="width: 100%;;" src="~common/img/home_banner1.png" />
-			</div>
 
 			<div class="square_container">
 				<div class="square" style="margin-left:10px;" @click="btnYeji">
-					<img class="square_icon" src="~common/img/home_icon_yj@3x.png" />
-					<p class="square_title">我的业绩</p>
+					<p class="numStyle">14</p>
+					<p class="square_title">待办事项</p>
 				</div>
 
 				<div class="square" @click="changetx">
-					<img class="square_icon" src="~common/img/home_icon_tx@3x.png" />
-					<p class="square_title">头像上传</p>
-				</div>
-				<div class="square" @click="changetx2">
-
+					<p class="numStyle">22</p>
+					<p class="square_title">待批量审批</p>
 				</div>
 
-				<div class="square" @click="changetx3">
-
-				</div>
 			</div>
+			<div style="width: 100%;height: 10px;background-color: whitesmoke;"></div>
+
+			<div class="square_container">
+				<div class="square" style="margin-left:10px;" @click="btnYeji">
+					<p class="numStyle">21</p>
+					<p class="square_title">已办事项</p>
+				</div>
+
+				<div class="square" @click="changetx">
+					<p class="numStyle">19</p>
+					<p class="square_title">已办结事项</p>
+				</div>
+
+			</div>
+			<div style="width: 100%;height: 10px;background-color: whitesmoke;"></div>
+
+			<!--<div class="DetailMessage">
+
+				<div style="display: flex;">
+
+					<div class="messageBigTitle">客户名称站位</div>
+					<p class="messageStlye">待审批</p>
+
+				</div>
+
+				<div style="height: 1px;width: 94%;background:#EDF0F2 ;margin-top: 10px;margin-left: 3%;"></div>
+
+				<div style="display: flex;">
+					<p class="messageTitle">客户名称</p>
+					<p class="messageContent">上海xxx分公司</p>
+				</div>
+				<div style="display: flex;">
+					<p class="messageTitle">客户类型</p>
+					<p class="messageContent">公司</p>
+				</div>
+				<div style="display: flex;">
+					<p class="messageTitle">申请类型</p>
+					<p class="messageContent">未知</p>
+				</div>
+				<div style="display: flex;">
+					<p class="messageTitle">申请金额（元）</p>
+					<p class="messageContent">20000000</p>
+				</div>
+				<div style="display: flex;">
+					<p class="messageTitle">申请人</p>
+					<p class="messageContent">立夏</p>
+				</div>
+				<div style="display: flex;">
+					<p class="messageTitle">申请机构</p>
+					<p class="messageContent">上海xxx分公司</p>
+				</div>
+
+			</div>-->
+
+			<WaitHandle v-for="(item,index) in listShenqingMing" :key="index" 
+				:customerType="item.customerType"
+				:applyType= "item.applyType"
+				:applyMoney= "item.applyMoney" 
+				:applyName="item.applyName" 
+				:applyJigou= "item.applyJigou">
+
+			</WaitHandle>
+
 		</div>
 		<div v-else>
 			<div style="display: flex;flex-wrap: wrap; align-items: center;flex-direction: column;">
@@ -50,6 +103,7 @@
 		quanxian
 	} from "service/task";
 
+	import WaitHandle from "./children/WaitHandle";
 
 	import {
 
@@ -58,13 +112,24 @@
 		hideNaviBar
 
 	} from "service/nativeUtils";
+
 	export default {
+
+		components: {
+			WaitHandle
+
+		},
 
 		data() {
 			return {
 
 				userid: '',
-				isFlag: true
+				isFlag: true,
+				listShenqingMing: [
+				{	customerType: "鼎折覆餗",applyType: "胜多负少" ,applyMoney: "水电费",applyName: "发鬼地方" ,applyJigou: "功夫格斗"},
+				{	customerType: "胜多负少的覆餗",applyType: "胜撒方式" ,applyMoney: "水苟富贵",applyName: "发发鬼地方方" ,applyJigou: "玉兔号"},
+				{	customerType: "第三方餗",applyType: "胜多多福多寿" ,applyMoney: "水电费",applyName: "发鬼地方" ,applyJigou: "功夫格斗"}
+				],
 
 			};
 		},
@@ -78,7 +143,6 @@
 
 				this.getquanxian();
 
-				console.log("对方水电费")
 			});
 
 		},
@@ -96,10 +160,20 @@
 				window.location.href = "put-headImg.html"
 
 			},
-			
-						onClickLeft() {
 
-ShouNav();
+			trainBtn() {
+
+				window.location.href = "TrainingMaterials.html"
+			},
+
+			NotificateBtn() {
+
+				window.location.href = "YewuNotificate.html"
+			},
+
+			onClickLeft() {
+
+				ShouNav();
 				//window.location.href = "index.html"
 
 			},
@@ -114,16 +188,13 @@ ShouNav();
 					} = await quanxian({
 						userid: this.userid,
 					});
-					
-					if(isFlag=="1")
-					{
-						this.isFlag=true;
-					}
-					else
-					{
-						
-						this.isFlag=false;
-						
+
+					if(isFlag == "1") {
+						this.isFlag = true;
+					} else {
+
+						this.isFlag = false;
+
 					}
 
 					console.log('权限+' + isFlag)
@@ -141,12 +212,14 @@ ShouNav();
 <style lang="less">
 	@import "~common/css/common.less";
 	.firstPage {
-		background-color: white;
-		height: 100%;
+		/*background: #FAFAFA;
+border-radius: 2px;
+border-radius: 2px;*/
+		background-color: #FAFAFA;
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
-				.rt_pos {
+		.rt_pos {
 			/*position: absolute;*/
 			right: 50px;
 			top: 150px;
@@ -164,8 +237,28 @@ ShouNav();
 		}
 		.square_container {
 			display: flex;
+			margin-top: 10px;
+			margin-left: 20px;
+			height: 60px;
 			/*justify-content: center;*/
 			.square {
+				display: flex;
+				flex-direction: column;
+				flex: 1;
+				/*align-items: center;*/
+				/*justify-content: center;*/
+				.numStyle {
+					font-family: DINAlternate-Bold;
+					font-size: 18px;
+					color: ##1E1F22;
+				}
+				.square_title {
+					font-family: PingFangSC-Regular;
+					font-size: 12px;
+					color: #697184;
+				}
+			}
+			.squareIcon {
 				display: flex;
 				flex-direction: column;
 				flex: 1;
@@ -174,15 +267,55 @@ ShouNav();
 				.square_icon {
 					width: 84px;
 					height: 84px;
+					/*align-items: center;*/
 				}
 				.square_title {
-					margin-top: -15px;
 					font-family: PingFangSC-Regular;
-					font-size: 14px;
-					color: #757575;
-					/*text-align: center;*/
+					font-size: 12px;
+					color: #697184;
 				}
 			}
 		}
+		/*.DetailMessage {
+			position: relative;
+			background: white;
+			width: 90%;
+			margin-left: 5%;
+			margin-top: 20px;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+			.messageBigTitle {
+				font-family: PingFangSC-Medium;
+				font-size: 16px;
+				color: #1E1F22;
+				margin-top: 10px;
+				margin-left: 10px;
+			}
+			.messageTitle {
+				font-family: PingFangSC-Regular;
+				font-size: 14px;
+				margin-top: 10px;
+				margin-left: 10px;
+				color: #697184;
+			}
+			.messageContent {
+				right: 10px;
+				margin-top: 10px;
+				position: absolute;
+				font-family: PingFangSC-Regular;
+				font-size: 14px;
+				color: #1E1F22;
+			}
+			.messageStlye {
+				right: 10px;
+				margin-top: 10px;
+				position: absolute;
+				font-family: PingFangSC-Regular;
+				font-size: 12px;
+				color: #FF910C;
+			}
+		}*/
 	}
 </style>
